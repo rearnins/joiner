@@ -9,7 +9,7 @@ local TeleportCheck = false
 game.Players.LocalPlayer.OnTeleport:Connect(function(State)
     if not TeleportCheck and queueTeleport then
         TeleportCheck = true
-        queueTeleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/...'))()")
+        queueTeleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/rearnins/joiner/refs/heads/main/joiner.lua'))()")
     end
 end)
 
@@ -67,7 +67,7 @@ button.MouseButton1Click:Connect(function()
     local jobId = textBox.Text
     if jobId ~= "" then
         local TeleportService = game:GetService("TeleportService")
-        queueTeleport([[loadstring(game:HttpGet('https://raw.githubusercontent.com/...'))()]])
+        queueTeleport([[loadstring(game:HttpGet('https://raw.githubusercontent.com/rearnins/joiner/refs/heads/main/joiner.lua'))()]])
         TeleportService:TeleportToPlaceInstance(game.PlaceId, jobId, game.Players.LocalPlayer)
     else
         warn("Please enter a valid Job ID!")
