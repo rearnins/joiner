@@ -1,0 +1,62 @@
+
+-- Create the Teleport UI
+local screenGui = Instance.new("ScreenGui")
+screenGui.ResetOnSpawn = false -- Keeps the UI persistent
+screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+-- Frame Settings
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0, 95, 0, 95) -- Adjusted height to fit all elements
+frame.Position = UDim2.new(0, 10, 1, -120) -- Positioned near the bottom-left
+frame.BackgroundColor3 = Color3.fromRGB(20, 20, 20) -- Darker background
+frame.BackgroundTransparency = 0.85 -- Enhanced transparency
+frame.Active = true
+frame.Draggable = true -- Enables dragging
+frame.Parent = screenGui
+
+-- Close Button ("X")
+local closeButton = Instance.new("TextButton")
+closeButton.Size = UDim2.new(0, 20, 0, 20) -- Proper size
+closeButton.Position = UDim2.new(1, -25, 0, 5) -- Positioned in the top-right corner
+closeButton.Text = "X"
+closeButton.BackgroundColor3 = Color3.fromRGB(150, 0, 0) -- Bright red
+closeButton.TextColor3 = Color3.fromRGB(255, 255, 255) -- White text
+closeButton.TextScaled = true -- Ensures text fits perfectly
+closeButton.BackgroundTransparency = 0.7 -- Semi-transparent button
+closeButton.Parent = frame
+
+closeButton.MouseButton1Click:Connect(function()
+    screenGui:Destroy()
+end)
+
+-- TextBox
+local textBox = Instance.new("TextBox")
+textBox.Size = UDim2.new(1, -10, 0.35, -5) -- Adjusted size for proper spacing
+textBox.Position = UDim2.new(0, 5, 0, 30) -- Positioned below the "X" button
+textBox.PlaceholderText = "Enter Job ID"
+textBox.BackgroundColor3 = Color3.fromRGB(30, 30, 30) -- Darker tone
+textBox.BackgroundTransparency = 0.7 -- Semi-transparent
+textBox.TextColor3 = Color3.fromRGB(255, 255, 255) -- White text for clarity
+textBox.Parent = frame
+
+-- Teleport Button
+local button = Instance.new("TextButton")
+button.Size = UDim2.new(1, -10, 0.35, -5) -- Matches the TextBox's size
+button.Position = UDim2.new(0, 5, 0.6, 5) -- Positioned below the TextBox
+button.Text = "TELEPORT"
+button.BackgroundColor3 = Color3.fromRGB(50, 50, 50) -- Darker button tone
+button.BackgroundTransparency = 0.6 -- Semi-transparent button
+button.TextColor3 = Color3.fromRGB(255, 255, 255) -- White text for visibility
+button.Parent = frame
+
+button.MouseButton1Click:Connect(function()
+    local jobId = textBox.Text
+    if jobId ~= "" then
+        local TeleportService = game:GetService("TeleportService")
+        TeleportService:TeleportToPlaceInstance(game.PlaceId, jobId, game.Players.LocalPlayer)
+    else
+        warn("Please enter a valid Job ID!")
+    end
+end)
+
+print("Reverted UI with working buttons is ready!")
